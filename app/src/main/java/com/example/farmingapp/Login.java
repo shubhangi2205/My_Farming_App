@@ -21,7 +21,7 @@ public class Login extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v2) {
-                        Intent i2 = new Intent(Login.this,Register.class);
+                        Intent i2 = new Intent(Login.this,PlotDetails.class);
                         startActivity(i2);
                         //finish();
                     }

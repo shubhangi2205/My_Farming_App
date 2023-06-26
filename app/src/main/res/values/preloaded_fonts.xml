@@ -3,6 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/architects_daughter</item>
         <item>@font/archivo_black</item>
+        <item>@font/berkshire_swash</item>
         <item>@font/calistoga</item>
     </array>
 </resources>

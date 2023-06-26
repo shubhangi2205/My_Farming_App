@@ -17,7 +17,7 @@ public class Startup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.startup);
 
-        b1 = findViewById(R.id.rbutton);
+        b1 = findViewById(R.id.savebutton1);
         b1.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

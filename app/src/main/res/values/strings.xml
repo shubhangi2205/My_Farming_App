@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">Farming App</string>
+<string name="app_name">Spinner Example</string>
+
+<string-array name="years">
+    <item>2019</item>
+    <item>2020</item>
+    <item>2021</item>
+    <item>2022</item>
+    <item>2023</item>
+    <item>2024</item>
+</string-array>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background=""
+    android:background="@drawable/gradient_main"
     tools:context=".Login">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteX="207dp">
 
         <Button
-            android:id="@+id/rbutton"
+            android:id="@+id/savebutton1"
             android:layout_width="143dp"
             android:layout_height="70dp"
             android:text="Register"

@@ -22,7 +22,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        b1 = findViewById(R.id.rbutton);
+        b1 = findViewById(R.id.savebutton1);
         name = findViewById(R.id.editName);
         phone = findViewById(R.id.editPhone);
         village = findViewById(R.id.editvillage);
