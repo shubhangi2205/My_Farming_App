@@ -6,10 +6,12 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class Login extends AppCompatActivity {
 
     Button b2  ;
+    TextView h1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState2) {
@@ -22,6 +24,18 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onClick(View v2) {
                         Intent i2 = new Intent(Login.this,PlotDetails.class);
+                        startActivity(i2);
+                        //finish();
+                    }
+                }
+        );
+
+        h1 = findViewById(R.id.register_link);
+        h1.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v2) {
+                        Intent i2 = new Intent(Login.this,Register.class);
                         startActivity(i2);
                         //finish();
                     }

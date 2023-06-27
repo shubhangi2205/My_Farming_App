@@ -9,4 +9,5 @@
     <item>2023</item>
     <item>2024</item>
 </string-array>
+    <string name="hyperlink"><a href="">Register</a></string>
 </resources>
