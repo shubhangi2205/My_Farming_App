@@ -27,7 +27,7 @@
             app:layout_constraintVertical_bias="0.881" />
 
         <EditText
-            android:id="@+id/editCrop"
+            android:id="@+id/editArea"
             android:layout_width="192dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -57,7 +57,7 @@
             app:layout_constraintVertical_bias="0.685" />
 
         <EditText
-            android:id="@+id/editplot"
+            android:id="@+id/editLocation"
             android:layout_width="193dp"
             android:layout_height="57dp"
             android:ems="10"
@@ -71,7 +71,7 @@
             app:layout_constraintVertical_bias="0.472" />
 
         <EditText
-            android:id="@+id/editSeason"
+            android:id="@+id/editAreaName"
             android:layout_width="212dp"
             android:layout_height="58dp"
             android:ems="10"
