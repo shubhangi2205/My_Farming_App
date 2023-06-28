@@ -13,13 +13,14 @@
         android:theme="@style/Theme.FarmingApp"
         tools:targetApi="31">
         <activity
+            android:name=".OtpVerificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".Register"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Login"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Startup"
             android:exported="true">
@@ -31,13 +32,10 @@
         </activity>
         <activity
             android:name=".PlotDetails"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".CropDetails"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
