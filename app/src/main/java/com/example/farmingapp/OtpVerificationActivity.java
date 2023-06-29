@@ -64,7 +64,7 @@ public class OtpVerificationActivity extends AppCompatActivity {
 //                        PhoneAuthProvider.verifyPhoneNumber(options);
                         //verifyCode(binding.editTextCode.getText().toString())
                         //verifyCode(binding.editTextCode.getText().toString());
-                        Intent intent = new Intent(OtpVerificationActivity.this, PlotDetails.class);
+                        Intent intent = new Intent(OtpVerificationActivity.this, HomePage.class);
                         startActivity(intent);
 
                     }

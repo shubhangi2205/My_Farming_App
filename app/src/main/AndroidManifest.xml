@@ -13,17 +13,8 @@
         android:theme="@style/Theme.FarmingApp"
         tools:targetApi="31">
         <activity
-            android:name=".OtpVerificationActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Register"
-            android:exported="true"></activity>
-        <activity
-            android:name=".Login"
-            android:exported="true"></activity>
-        <activity
-            android:name=".Startup"
-            android:exported="true">
+            android:name=".DummyActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,11 +22,36 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ExpenseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HarvestDetails"
+            android:exported="false"
+            android:label="@string/title_activity_harvest_details"
+            android:theme="@style/Theme.FarmingApp" />
+        <activity
+            android:name=".OtpVerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="true" />
+        <activity
+            android:name=".Login"
+            android:exported="true" />
+        <activity
+            android:name=".Startup"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".PlotDetails"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".CropDetails"
-            android:exported="true"></activity>
+            android:exported="true" />
+        <activity
+            android:name=".HomePage"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"

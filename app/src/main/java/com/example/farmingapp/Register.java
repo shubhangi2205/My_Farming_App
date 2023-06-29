@@ -1,11 +1,15 @@
 package com.example.farmingapp;
 
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +36,9 @@ public class Register extends AppCompatActivity {
     EditText name, village, phone;
     FirebaseFirestore db;
 
-
+    boolean isNameEntered = false;
+    boolean isPhoneEntered = false;
+    boolean isVillageEntered = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,80 @@ public class Register extends AppCompatActivity {
         name = findViewById(R.id.editName);
         phone = findViewById(R.id.editPhone);
         village = findViewById(R.id.editvillage);
+
+        LiveData<Boolean> shouldEnable = new MutableLiveData<>();
+
+
+        name.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        isNameEntered = false;
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                               if(charSequence.toString().isEmpty()){
+
+                               } else {
+
+                               }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        isNameEntered = true;
+                    }
+                }
+        );
+
+        phone.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        isPhoneEntered = false;
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        if(charSequence.toString().isEmpty()){
+
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                }
+        );
+
+        village.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        isVillageEntered = false;
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        if(charSequence.toString().isEmpty()){
+
+                        } else {
+
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        isVillageEntered = true;
+                    }
+                }
+        );
+
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +130,23 @@ public class Register extends AppCompatActivity {
                 String Name = name.getText().toString();
                 String Phone = phone.getText().toString();
                 String Village = village.getText().toString();
+
+                if(Name.isEmpty()){
+                    //Name.setError("Required");
+                    //Name.requestFocus();
+                    name.setError("Required");
+                    return;
+                }
+                if(Phone.isEmpty()){
+                    phone.setError("Required");
+                    return;
+                }
+                if(Village.isEmpty()){
+                    village.setError("Required");
+                    return;
+                }
+               // b1.setEnabled(!Name.isEmpty() && !Phone.isEmpty() && !Village.isEmpty());
+
                 Map<String,Object> farmer = new HashMap<>();
                 farmer.put("Name",Name);
                 farmer.put("Phone Number",Phone);

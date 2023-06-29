@@ -50,7 +50,7 @@ public class Login extends AppCompatActivity {
                             return;
                         }
                         Intent intent = new Intent(Login.this, OtpVerificationActivity.class);
-                        intent.putExtra("phoneNum", binding.etPhoneNum.getText().toString());
+                        intent.putExtra("phoneNum", "+91"+binding.etPhoneNum.getText().toString());
                         startActivity(intent);
                         //finish();
                     }
