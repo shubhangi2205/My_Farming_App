@@ -1,26 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bggreen"
     tools:context=".ExpenseActivity">
-    <TextView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Plot Name"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout_editor_absoluteX="207dp">
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/savebutton1"
+            android:layout_width="143dp"
+            android:layout_height="70dp"
+            android:backgroundTint="?android:attr/colorPressedHighlight"
+            android:text="Register"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textSize="20sp"
 
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.975" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="10"
+            android:background="@drawable/bg4"
+            android:ems="10"
+            android:foregroundTint="#EDE7E7"
+            android:hint="Enter Name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.345" />
+
+        <EditText
+            android:id="@+id/editvillage"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="10"
+            android:background="@drawable/bg"
+            android:ems="10"
+            android:foregroundTint="#EDE7E7"
+            android:hint="Enter Village"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.658" />
+
+        <EditText
+            android:id="@+id/editPhone"
+            android:hint="Enter Phone Number"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="10"
+            android:background="@drawable/bg"
+            android:ems="10"
+            android:foregroundTint="#EDE7E7"
+            android:textColorHint="@color/black"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.079"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/akaya_telivigala"
+            android:text="Expense Details"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.625"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.093" />
+
+        <EditText
+            android:id="@+id/editphoto"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="10"
+            android:background="@drawable/bg"
+            android:ems="10"
+            android:foregroundTint="#EDE7E7"
+            android:hint="Upload photo"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.808" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

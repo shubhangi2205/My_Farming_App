@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bggreen"
+        android:background="@drawable/bg3"
         tools:context=".Login">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +24,7 @@
                 android:id="@+id/getotp"
                 android:layout_width="131dp"
                 android:layout_height="55dp"
+                android:backgroundTint="?android:attr/colorPressedHighlight"
                 android:text="Get OTP"
                 android:textColorHighlight="@color/black"
                 android:textSize="20sp"
@@ -33,6 +34,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.594" />
+
 
             <EditText
                 android:id="@+id/et_phone_num"
@@ -49,42 +51,31 @@
                 android:maxLines="1"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:textColorHint="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.374" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="258dp"
-                android:layout_height="120dp"
-                android:src="@drawable/logo"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.496"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.045" />
+                app:layout_constraintVertical_bias="0.272" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/calistoga"
+                android:fontFamily="@font/kaushan_script"
                 android:text="Login"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="34sp"
+                android:textSize="60sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.238" />
-
+                app:layout_constraintVertical_bias="0.081" />
 
             <TextView
                 android:id="@+id/textView6"

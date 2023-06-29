@@ -3,10 +3,14 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/abril_fatface</item>
         <item>@font/aclonica</item>
+        <item>@font/akaya_telivigala</item>
         <item>@font/anonymous_pro_italic</item>
         <item>@font/architects_daughter</item>
         <item>@font/archivo_black</item>
         <item>@font/berkshire_swash</item>
+        <item>@font/bungee_shade</item>
         <item>@font/calistoga</item>
+        <item>@font/diplomata</item>
+        <item>@font/emblema_one</item>
     </array>
 </resources>
