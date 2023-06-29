@@ -1,82 +1,140 @@
 package com.example.farmingapp;
 
-import android.content.Intent;
-import android.view.View;
-import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.util.Log;
 
+import com.example.farmingapp.models.CropModel;
+import com.example.farmingapp.models.PlotModel;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
-
+import java.util.Objects;
 
 public class PlotDetails extends AppCompatActivity {
-
-    Button b3  ;
-    EditText area, area_name, location;
-    CheckBox checkbox;
     FirebaseFirestore db;
+    final String TAG = "firestore";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState2) {
-        super.onCreate(savedInstanceState2);
-        setContentView(R.layout.plotdetails);
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         db = FirebaseFirestore.getInstance();
-        area_name = findViewById(R.id.editAreaName);
-        area = findViewById(R.id.editArea);
-        location = findViewById(R.id.editLocation);
-        checkbox= findViewById(R.id.checkBox);
-        b3 = findViewById(R.id.savebutton1);
-        b3.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v3) {
 
-                        String Area_name = area_name.getText().toString();
-                        String Area = area.getText().toString();
-                        String Location = location.getText().toString();
-                        String Landcheckbox = checkbox.getText().toString();
-                        Map<String,Object> plot = new HashMap<>();
-                        plot.put("Area_name",area_name);
-                        plot.put("Area",area);
-                        plot.put("Location",location);
-                        plot.put("Landcheckbox",checkbox);
+        PlotModel plotModel = new PlotModel(
+                "Brahampuri",
+                1500,
+                "Meerut"
 
-                        db.collection("plot")
-                                .add(plot)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Toast.makeText(PlotDetails.this,"Details saved",Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull @NotNull Exception e) {
-
-                                        Toast.makeText(PlotDetails.this,"Failed",Toast.LENGTH_SHORT).show();
-
-
-                                    }
-                                });
-                        Intent i3 = new Intent(PlotDetails.this,CropDetails.class);
-                        startActivity(i3);
-                        //finish();
-                    }
-                }
         );
+        savePlotDetails(plotModel);
+        getPlotDetails(plotModel);
+    }
+
+    void savePlotDetails(PlotModel plotModel){
+        Map<String, Object> plotDetailMap = plotModel.mapAllTheData();
+        db.collection("farmer")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String farmerDocId = null;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String phoneNum = (String) document.get("Phone Number");
+                                if(Objects.equals(phoneNum, "123568898")) {
+                                    farmerDocId = document.getId();
+                                    break;
+                                }
+                            }
+                            db.collection("farmer")
+                                    .document(farmerDocId)
+                                    .collection("plot_details")
+                                    .add(plotDetailMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            //Log.d(TAG, "Data Saved at crop_details successfully");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull @NotNull Exception e) {
+
+                                            Log.d(TAG, "Failed to Save data at plot_details");
+
+
+                                        }
+                                    });
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    void getPlotDetails(PlotModel plotModel){
+        Map<String, Object> plotDetailMap = plotModel.mapAllTheData();
+        db.collection("farmer")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String farmerDocId = null;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String phoneNum = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNum, "123568898")) {
+                                    farmerDocId = document.getId();
+                                    break;
+                                }
+                            }
+                            //db.collection("crop_details")
+                            db.collection("farmer")
+                                    .document(farmerDocId)
+                                    .collection("plot_details")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            ArrayList<String> plotNameList = new ArrayList<>();
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    Log.d(TAG, document.getId() + " => " + document.get("plotName"));
+                                                    //String listOfCrops = (String) document.get("cropName");
+                                                    //Log.d(TAG, "Data at crop_details retrieved successfully");
+
+                                                    plotNameList.add((String) document.get("plotName"));
+                                                    //Log.d("List of crops", String.valueOf(cropNameList));
+
+
+                                                }
+                                                Log.d(
+                                                        TAG, String.valueOf(plotNameList)
+                                                );
+                                            } else {
+                                                Log.d(TAG, "Error getting documents: ", task.getException());
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
+                });
+    };
+
+    void updatePlotDetails(){
 
     }
 }

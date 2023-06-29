@@ -1,103 +1,150 @@
 package com.example.farmingapp;
 
-import android.content.Intent;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.util.Log;
 
+import com.example.farmingapp.models.CropModel;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
-public class CropDetails extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
-    Button b4  ;
-    EditText season, plot, crop, sowing_area;
-    Spinner year;
+public class CropDetails extends AppCompatActivity {
     FirebaseFirestore db;
+    final String TAG = "firestore";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState2) {
-        super.onCreate(savedInstanceState2);
-        setContentView(R.layout.cropdetails);
-
-        Spinner spinner = findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.years, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         db = FirebaseFirestore.getInstance();
-        season = findViewById(R.id.editAreaName);
-        crop = findViewById(R.id.editArea);
-        plot = findViewById(R.id.editLocation);
-        sowing_area = findViewById(R.id.editSowing);
-        year = findViewById(R.id.spinner);
-        b4 = findViewById(R.id.savebutton1);
-        
-        b4.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v4) {
+//        ArrayList<String> cropNameList = new ArrayList<>();
+//        cropNameList.add("Rice");
+//        cropNameList.add("Wheat");
+//
+//        ArrayList<String> plotList = new ArrayList<>();
+//        plotList.add("abc");
+//        plotList.add("xyz");
 
-                        String Year = year.getSelectedItem().toString();
-                        String Season = season.getText().toString();
-                        String Plot = plot.getText().toString();
-                        String Crop = crop.getText().toString();
-                        String Showing_area = sowing_area.getText().toString();
-                        Map<String,Object> crop = new HashMap<>();
-                        crop.put("Year",year);
-                        crop.put("Season",season);
-                        crop.put("Plot",plot);
-                        crop.put("Crop",crop);
-                        crop.put("Showing_area",sowing_area);
-
-                        db.collection("crop")
-                                .add(crop)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Toast.makeText(CropDetails.this,"Details saved",Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull @NotNull Exception e) {
-
-                                        Toast.makeText(CropDetails.this,"Failed",Toast.LENGTH_SHORT).show();
-
-
-                                    }
-                                });
-                        Intent i4 = new Intent(CropDetails.this,PlotDetails.class);
-                        startActivity(i4);
-                        //finish();
-                    }
-                }
+        CropModel cropModel = new CropModel(
+                "Sugarcane",
+                2023,
+                "Winter",
+                20000,
+                "Delhi"
         );
-
-    }
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+        //saveCropDetails(cropModel);
+        getCropDetails(cropModel);
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    void saveCropDetails(CropModel cropModel){
+        Map<String, Object> cropDetailMap = cropModel.mapAllTheData();
+        db.collection("farmer")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String farmerDocId = null;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String phoneNum = (String) document.get("Phone Number");
+                                if(Objects.equals(phoneNum, "123568898")) {
+                                    farmerDocId = document.getId();
+                                    break;
+                                }
+                            }
+                            db.collection("farmer")
+                                    .document(farmerDocId)
+                                    .collection("crop_details")
+                                    .add(cropDetailMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            //Log.d(TAG, "Data Saved at crop_details successfully");
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull @NotNull Exception e) {
+
+                                            Log.d(TAG, "Failed to Save data at crop_details");
+
+
+                                        }
+                                    });
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    void getCropDetails(CropModel cropModel){
+        Map<String, Object> cropDetailMap = cropModel.mapAllTheData();
+        db.collection("farmer")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String farmerDocId = null;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String phoneNum = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNum, "123568898")) {
+                                    farmerDocId = document.getId();
+                                    break;
+                                }
+                            }
+                            //db.collection("crop_details")
+                            db.collection("farmer")
+                                    .document(farmerDocId)
+                                    .collection("crop_details")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            ArrayList<String> cropNameList = new ArrayList<>();
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    Log.d(TAG, document.getId() + " => " + document.get("cropName"));
+                                                    //String listOfCrops = (String) document.get("cropName");
+                                                    //Log.d(TAG, "Data at crop_details retrieved successfully");
+
+                                                    cropNameList.add((String) document.get("cropName"));
+                                                    //Log.d("List of crops", String.valueOf(cropNameList));
+
+
+//        cropNameList.add("Rice");
+//        cropNameList.add("Wheat");
+
+                                                }
+                                                Log.d(
+                                                        TAG, String.valueOf(cropNameList)
+                                                );
+                                            } else {
+                                                Log.d(TAG, "Error getting documents: ", task.getException());
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
+                });
+    };
+
+    void updateCropDetails(){
 
     }
 }

@@ -3,21 +3,21 @@ package com.example.farmingapp.models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CropModel {
-    //List<String> cropNameList;
+public class FarmingOutputModel {
+
     String cropName;
     int year;
     String season;
-    long sowingArea;
-    //List<String> plotList;
+    int yield;
+
     String plot;
 
-    public CropModel(String cropName, int year, String season, long sowingArea, String plot) {
+    public FarmingOutputModel(String cropName, int year, String season, int yield, String plot) {
         //this.cropNameList = cropNameList;
         this.cropName = cropName;
         this.year = year;
         this.season = season;
-        this.sowingArea = sowingArea;
+        this.yield = yield;
         this.plot = plot;
     }
     public Map<String,Object> mapAllTheData(){
@@ -25,7 +25,7 @@ public class CropModel {
         map.put("cropName",this.cropName);
         map.put("year",this.year);
         map.put("season",this.season);
-        map.put("sowingArea",this.sowingArea);
+        map.put("yield",this.yield);
         map.put("plot",this.plot);
 
         return map;
