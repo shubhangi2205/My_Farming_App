@@ -8,11 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class HomePage extends AppCompatActivity {
 
-    TextView t1;
+    LinearLayout t1;
     TextView t2;
     TextView t3;
     TextView t4;
@@ -32,7 +33,7 @@ public class HomePage extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(HomePage.this,CropDetails.class);
+                        Intent i = new Intent(HomePage.this,ExpenseActivity.class);
                         startActivity(i);
                     }
                 }

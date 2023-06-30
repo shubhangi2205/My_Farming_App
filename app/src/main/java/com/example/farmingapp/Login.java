@@ -36,7 +36,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState2) {
         super.onCreate(savedInstanceState2);
         binding = DataBindingUtil.setContentView(this,R.layout.login);
-        String phoneNum1 = getIntent().getStringExtra("phoneNum");
+        String phoneNum = getIntent().getStringExtra("phoneNum");
+        binding.etPhoneNum.setText(phoneNum);
 //
 //        b2 = findViewById(R.id.getotp);
 //        etPhoneNum = findViewById(R.id.et_phone_num);
@@ -50,7 +51,7 @@ public class Login extends AppCompatActivity {
                             return;
                         }
                         Intent intent = new Intent(Login.this, OtpVerificationActivity.class);
-                        intent.putExtra("phoneNum", "+91"+binding.etPhoneNum.getText().toString());
+                        intent.putExtra("phoneNum", binding.etPhoneNum.getText().toString());
                         startActivity(intent);
                         //finish();
                     }

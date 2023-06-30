@@ -2,10 +2,14 @@ package com.example.farmingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
+import com.example.farmingapp.databinding.PlotdetailsBinding;
 import com.example.farmingapp.models.CropModel;
 import com.example.farmingapp.models.PlotModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,20 +30,28 @@ import java.util.Objects;
 public class PlotDetails extends AppCompatActivity {
     FirebaseFirestore db;
     final String TAG = "firestore";
+    PlotdetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this,R.layout.plotdetails);
         db = FirebaseFirestore.getInstance();
 
-        PlotModel plotModel = new PlotModel(
-                "Brahampuri",
-                1500,
-                "Meerut"
 
-        );
-        savePlotDetails(plotModel);
-        getPlotDetails(plotModel);
+        binding.savebutton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PlotModel plotModel = new PlotModel(
+                        binding.editAreaName.getText().toString(),
+                        Integer.parseInt(binding.editArea.getText().toString()),
+                        binding.editLocation.getText().toString()
+                );
+                savePlotDetails(plotModel);
+            }
+        });
+
+      //  getPlotDetails(plotModel);
     }
 
     void savePlotDetails(PlotModel plotModel){
@@ -66,6 +78,8 @@ public class PlotDetails extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
                                             //Log.d(TAG, "Data Saved at crop_details successfully");
+                                            Intent intent = new Intent(PlotDetails.this, ExpenseActivity.class);
+                                            startActivity(intent);
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
