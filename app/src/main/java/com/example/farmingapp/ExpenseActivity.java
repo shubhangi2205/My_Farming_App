@@ -22,6 +22,7 @@ import com.example.farmingapp.databinding.ActivityExpenseBinding;
 import com.example.farmingapp.databinding.CropdetailsBinding;
 import com.example.farmingapp.databinding.PlotdetailsBinding;
 import com.example.farmingapp.models.CropModel;
+import com.example.farmingapp.models.ExpenseModel;
 import com.example.farmingapp.models.PlotModel;
 import com.example.farmingapp.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -69,8 +70,119 @@ public class ExpenseActivity extends AppCompatActivity {
             }
         });
 
+        binding.saveExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ExpenseModel expenseModel = new ExpenseModel(
+                        binding.spinnerTypeOfExpense.getAdapter(),
+                        binding.etDateOfExpense.getText().toString(),
+                        binding.description1.getText().toString(),
+                        Integer.parseInt(binding.amt.getText().toString())
+                );
+                saveExpenseDetails(expenseModel);
+                getExpenseDetails(expenseModel);
+
+            }
+        });
 
 
+
+    }
+
+    private void getExpenseDetails(ExpenseModel expenseModel) {
+        Map<String, Object> expenseDetailMap = expenseModel.mapAllTheData();
+        db.collection("farmer")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String farmerDocId = null;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String phoneNum = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNum, "123568898")) {
+                                    farmerDocId = document.getId();
+                                    break;
+                                }
+                            }
+                            //db.collection("crop_details")
+                            db.collection("farmer")
+                                    .document(farmerDocId)
+                                    .collection("expense_details")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            ArrayList<Integer> expenseDetailsList = new ArrayList<>();
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    Log.d(TAG, document.getId() + " => " + document.getData());
+                                                    Log.d(TAG, document.getId() + " => " + document.get("ExpenseAmount"));
+                                                    int expenseAmountList = (int) document.get("expenseAmount");
+
+                                                    expenseDetailsList.add(expenseAmountList);
+                                                    //expenseDetailsList.add((String) document.get("ExpenseAmount"));
+                                                    Log.d("expenseAmountList", String.valueOf(expenseAmountList));
+
+
+                                                }
+                                                Log.d(TAG, "Data at expense_details retrieved successfully");
+                                                Log.d(
+                                                        TAG, String.valueOf(expenseDetailsList)
+                                                );
+                                            } else {
+                                                Log.d(TAG, "Error getting documents: ", task.getException());
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
+                });
+    }
+
+    private void saveExpenseDetails(ExpenseModel expenseModel) {
+        Map<String, Object> expenseDetailMap = expenseModel.mapAllTheData();
+        db.collection("farmer")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String farmerDocId = null;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String phoneNum = (String) document.get("Phone Number");
+                                if(Objects.equals(phoneNum, "123568898")) {
+                                    farmerDocId = document.getId();
+                                    break;
+                                }
+                            }
+                            db.collection("farmer")
+                                    .document(farmerDocId)
+                                    .collection("expense_details")
+                                    .add(expenseDetailMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Log.d(TAG, "Data Saved at expense_details successfully");
+//                                        Intent intent = new Intent(ExpenseActivity.this, CropDetails.class);
+//                                            startActivity(intent);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull @NotNull Exception e) {
+
+                                            Log.d(TAG, "Failed to Save data at expense_details");
+
+
+                                        }
+                                    });
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
     private void setCropAdapter(ArrayAdapter<String> cropAdapter) {

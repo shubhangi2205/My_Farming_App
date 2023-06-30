@@ -193,9 +193,6 @@ public class CropDetails extends AppCompatActivity {
                                                     //Log.d("List of crops", String.valueOf(cropNameList));
 
 
-//        cropNameList.add("Rice");
-//        cropNameList.add("Wheat");
-
                                                 }
                                                 Log.d(
                                                         TAG, String.valueOf(cropNameList)
