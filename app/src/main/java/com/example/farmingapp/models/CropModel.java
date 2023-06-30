@@ -1,18 +1,22 @@
 package com.example.farmingapp.models;
 
+import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class CropModel {
     //List<String> cropNameList;
     String cropName;
-    int year;
-    String season;
+    SpinnerAdapter year;
+    //String season;
+    SpinnerAdapter season;
     long sowingArea;
     //List<String> plotList;
-    String plot;
+    SpinnerAdapter plot;
 
-    public CropModel(String cropName, int year, String season, long sowingArea, String plot) {
+    public CropModel(String cropName, SpinnerAdapter year, SpinnerAdapter season, long sowingArea, SpinnerAdapter plot) {
         //this.cropNameList = cropNameList;
         this.cropName = cropName;
         this.year = year;

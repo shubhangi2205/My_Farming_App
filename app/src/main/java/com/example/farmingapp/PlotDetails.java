@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 
 import com.example.farmingapp.databinding.PlotdetailsBinding;
 import com.example.farmingapp.models.CropModel;
@@ -45,7 +46,8 @@ public class PlotDetails extends AppCompatActivity {
                 PlotModel plotModel = new PlotModel(
                         binding.editAreaName.getText().toString(),
                         Integer.parseInt(binding.editArea.getText().toString()),
-                        binding.editLocation.getText().toString()
+                        binding.editLocation.getText().toString(),
+                        binding.checkBox.getText().
                 );
                 savePlotDetails(plotModel);
             }
@@ -77,7 +79,7 @@ public class PlotDetails extends AppCompatActivity {
                                     .add(plotDetailMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
-                                            //Log.d(TAG, "Data Saved at crop_details successfully");
+                                            Log.d(TAG, "Data Saved at plot_details successfully");
                                             Intent intent = new Intent(PlotDetails.this, ExpenseActivity.class);
                                             startActivity(intent);
                                         }

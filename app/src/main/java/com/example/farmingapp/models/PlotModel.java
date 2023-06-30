@@ -10,16 +10,15 @@ public class PlotModel {
     String plotName;
     long plotArea;
     String location;
-    //CheckBox landReg;
-    //List<String> plotList;
-    String plot;
+    boolean landReg;
 
-    public PlotModel(String plotName, long plotArea, String location) {
+
+    public PlotModel(String plotName, long plotArea, String location, boolean landReg) {
         //this.cropNameList = cropNameList;
         this.plotName = plotName;
         this.plotArea = plotArea;
         this.location = location;
-        //this.landReg = landReg;
+        this.landReg = landReg;
 
     }
 
