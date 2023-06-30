@@ -44,13 +44,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="2"
                 android:background="@drawable/bg4"
-                android:spinnerMode="dropdown"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.059"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.164" />
+                android:spinnerMode="dropdown" />
 
             <TextView
                 android:id="@+id/tvPlot"
@@ -62,13 +56,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
                 android:textColor="#D3D3D3"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.679"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView"
-                app:layout_constraintVertical_bias="0.158" />
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -208,7 +196,7 @@
             android:layout_height="70dp"
             android:backgroundTint="?android:attr/colorPressedHighlight"
             android:text="Save"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/black"
             android:textColorHighlight="@color/black"
