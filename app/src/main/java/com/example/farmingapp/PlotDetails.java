@@ -46,8 +46,7 @@ public class PlotDetails extends AppCompatActivity {
                 PlotModel plotModel = new PlotModel(
                         binding.editAreaName.getText().toString(),
                         Integer.parseInt(binding.editArea.getText().toString()),
-                        binding.editLocation.getText().toString(),
-                        binding.checkBox.getText().
+                        binding.editLocation.getText().toString()
                 );
                 savePlotDetails(plotModel);
             }

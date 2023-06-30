@@ -13,12 +13,12 @@ public class PlotModel {
     boolean landReg;
 
 
-    public PlotModel(String plotName, long plotArea, String location, boolean landReg) {
+    public PlotModel(String plotName, long plotArea, String location) {
         //this.cropNameList = cropNameList;
         this.plotName = plotName;
         this.plotArea = plotArea;
         this.location = location;
-        this.landReg = landReg;
+//        this.landReg = landReg;
 
     }
 
