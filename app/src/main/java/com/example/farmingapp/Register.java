@@ -7,25 +7,19 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
-import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,9 +40,9 @@ public class Register extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         b1 = findViewById(R.id.savebutton1);
-        name = findViewById(R.id.editName);
-        phone = findViewById(R.id.editPhone);
-        village = findViewById(R.id.editvillage);
+        name = findViewById(R.id.date);
+        phone = findViewById(R.id.description);
+        village = findViewById(R.id.description1);
 
         LiveData<Boolean> shouldEnable = new MutableLiveData<>();
 
@@ -169,6 +163,7 @@ public class Register extends AppCompatActivity {
                             }
                         });
                 Intent i = new Intent(Register.this,Login.class);
+                i.putExtra("phoneNum", "+91"+phone.getText().toString());
                 startActivity(i);
             }
         });

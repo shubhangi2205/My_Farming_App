@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState2) {
         super.onCreate(savedInstanceState2);
         binding = DataBindingUtil.setContentView(this,R.layout.login);
-
+        String phoneNum1 = getIntent().getStringExtra("phoneNum");
 //
 //        b2 = findViewById(R.id.getotp);
 //        etPhoneNum = findViewById(R.id.et_phone_num);

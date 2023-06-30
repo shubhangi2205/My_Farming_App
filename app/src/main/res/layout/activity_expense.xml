@@ -14,11 +14,11 @@
         tools:layout_editor_absoluteX="207dp">
 
         <Button
-            android:id="@+id/savebutton1"
+            android:id="@+id/savebutton"
             android:layout_width="143dp"
             android:layout_height="70dp"
             android:backgroundTint="?android:attr/colorPressedHighlight"
-            android:text="Register"
+            android:text="Save"
             android:textColor="@color/black"
             android:textColorHighlight="@color/black"
             android:textSize="20sp"
@@ -29,8 +29,32 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.975" />
 
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="376dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.571"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.499" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <EditText
-            android:id="@+id/editName"
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
@@ -40,8 +64,8 @@
             android:background="@drawable/bg4"
             android:ems="10"
             android:foregroundTint="#EDE7E7"
-            android:hint="Enter Name"
-            android:inputType="text"
+            android:hint="Date Of Expense"
+            android:inputType="date"
             android:maxLines="1"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -52,10 +76,10 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.345" />
+            app:layout_constraintVertical_bias="0.323" />
 
         <EditText
-            android:id="@+id/editvillage"
+            android:id="@+id/description1"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
@@ -65,7 +89,7 @@
             android:background="@drawable/bg"
             android:ems="10"
             android:foregroundTint="#EDE7E7"
-            android:hint="Enter Village"
+            android:hint="Description"
             android:inputType="text"
             android:maxLines="1"
             android:paddingStart="20dp"
@@ -74,34 +98,10 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.658" />
-
-        <EditText
-            android:id="@+id/editPhone"
-            android:hint="Enter Phone Number"
-            android:inputType="phone"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="20dp"
-            android:alpha="10"
-            android:background="@drawable/bg"
-            android:ems="10"
-            android:foregroundTint="#EDE7E7"
-            android:textColorHint="@color/black"
-            android:maxLines="1"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.079"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintVertical_bias="0.685" />
 
         <TextView
             android:id="@+id/textView"
@@ -115,13 +115,12 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.625"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.093" />
+            app:layout_constraintVertical_bias="0.025" />
 
         <EditText
-            android:id="@+id/editphoto"
+            android:id="@+id/amt"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
@@ -131,8 +130,8 @@
             android:background="@drawable/bg"
             android:ems="10"
             android:foregroundTint="#EDE7E7"
-            android:hint="Upload photo"
-            android:inputType="text"
+            android:hint="Amount"
+            android:inputType="number"
             android:maxLines="1"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -144,6 +143,59 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.808" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="140dp"
+            android:layout_height="49dp"
+            android:background="@drawable/bg4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.073"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.262" />
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="140dp"
+            android:layout_height="49dp"
+            android:background="@drawable/bg4"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.059"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.164" />
+
+        <TextView
+            android:id="@+id/tvplot1"
+            android:layout_width="161dp"
+            android:layout_height="26dp"
+            android:text="Add Plot"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.679"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.158" />
+
+        <TextView
+            android:id="@+id/tvcrop1"
+            android:layout_width="161dp"
+            android:layout_height="26dp"
+            android:text="Add Crop"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.246" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
