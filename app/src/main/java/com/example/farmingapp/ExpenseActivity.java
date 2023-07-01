@@ -73,16 +73,16 @@ public class ExpenseActivity extends AppCompatActivity {
         binding.saveExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ExpenseModel expenseModel = new ExpenseModel(
-                        binding.spinnerTypeOfExpense.getAdapter(),
-                        binding.etDateOfExpense.getText().toString(),
-                        binding.description1.getText().toString(),
-                        Integer.parseInt(binding.amt.getText().toString())
-                );
-                saveExpenseDetails(expenseModel);
-                getExpenseDetails(expenseModel);
-                Intent intent = new Intent(ExpenseActivity.this, HomePage.class);
-                startActivity(intent);
+//                ExpenseModel expenseModel = new ExpenseModel(
+//                        binding.spinnerTypeOfExpense.getAdapter(),
+//                        binding.etDateOfExpense.getText().toString(),
+//                        binding.description1.getText().toString(),
+//                        Integer.parseInt(binding.amt.getText().toString())
+//                );
+               // saveExpenseDetails(expenseModel);
+                getExpenseDetails();
+//                Intent intent = new Intent(ExpenseActivity.this, HomePage.class);
+//                startActivity(intent);
 
             }
         });
@@ -91,8 +91,7 @@ public class ExpenseActivity extends AppCompatActivity {
 
     }
 
-    private void getExpenseDetails(ExpenseModel expenseModel) {
-        Map<String, Object> expenseDetailMap = expenseModel.mapAllTheData();
+    private void getExpenseDetails() {
         db.collection("farmer")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -112,27 +111,23 @@ public class ExpenseActivity extends AppCompatActivity {
                             db.collection("farmer")
                                     .document(farmerDocId)
                                     .collection("expense_details")
+                                   // .whereEqualTo("ExpenseAmount", 600)
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             ArrayList<Integer> expenseDetailsList = new ArrayList<>();
                                             if (task.isSuccessful()) {
-                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                QuerySnapshot querySnapshot = task.getResult();
+                                                for (QueryDocumentSnapshot document : querySnapshot) {
                                                     Log.d(TAG, document.getId() + " => " + document.getData());
                                                     Log.d(TAG, document.getId() + " => " + document.get("ExpenseAmount"));
-                                                    int expenseAmountList = (int) document.get("expenseAmount");
-
+                                                    int expenseAmountList = document.getLong("ExpenseAmount").intValue();
                                                     expenseDetailsList.add(expenseAmountList);
-                                                    //expenseDetailsList.add((String) document.get("ExpenseAmount"));
                                                     Log.d("expenseAmountList", String.valueOf(expenseAmountList));
-
-
                                                 }
                                                 Log.d(TAG, "Data at expense_details retrieved successfully");
-                                                Log.d(
-                                                        TAG, String.valueOf(expenseDetailsList)
-                                                );
+                                                Log.d(TAG, String.valueOf(expenseDetailsList));
                                             } else {
                                                 Log.d(TAG, "Error getting documents: ", task.getException());
                                             }
