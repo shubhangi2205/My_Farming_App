@@ -47,18 +47,16 @@
 
             <CheckBox
                 android:id="@+id/checkBox"
-                android:layout_width="23dp"
-                android:layout_height="27dp"
-                android:buttonTint="@color/pink"
-                android:foreground="@color/design_default_color_primary_dark"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:foreground="@color/material_dynamic_neutral95"
                 android:foregroundGravity="fill"
-                android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.347"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.632" />
+                app:layout_constraintVertical_bias="0.617" />
 
             <EditText
                 android:id="@+id/editArea"
@@ -157,23 +155,30 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.055" />
 
-
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/calistoga"
+                android:id="@+id/textView8"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:alpha="10"
+                android:background="@drawable/bg"
+                android:backgroundTint="@color/material_dynamic_neutral95"
+                android:ems="10"
+                android:foregroundTint="#EDE7E7"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:text="7/12"
-                android:textAlignment="center"
-                android:textColor="@color/material_dynamic_neutral95"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
                 android:textSize="20sp"
-                android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.041"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.629" />
+                app:layout_constraintVertical_bias="0.599" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>

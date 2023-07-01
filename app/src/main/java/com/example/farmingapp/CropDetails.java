@@ -79,9 +79,9 @@ public class CropDetails extends AppCompatActivity {
 //        binding.spSeason.setAdapter(arrayAdapter);
 //        binding.spSeason.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
         db = FirebaseFirestore.getInstance();
-        ArrayAdapter<String> plotAdapter = new ArrayAdapter<String>(this, R.layout.spinner_dropdown_item, R.id.txtSpinnerItemPlot);
-        binding.spinnerPlot.setAdapter(plotAdapter);
-        setPlotAdapter(plotAdapter);
+        ArrayAdapter<String> cropAdapter = new ArrayAdapter<String>(this, R.layout.spinner_dropdown_crop, R.id.txtSpinnerItemCrop);
+        binding.spinnerCrop.setAdapter(cropAdapter);
+        setCropAdapter(cropAdapter);
 
         binding.saveCrop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +91,7 @@ public class CropDetails extends AppCompatActivity {
                         binding.spYear.getAdapter(),
                         binding.spSeason.getAdapter(),
                         Integer.parseInt(binding.etSowingArea.getText().toString()),
-                        binding.spinnerPlot.getAdapter()
+                        binding.spinnerCrop.getAdapter()
                 );
                 saveCropDetails(cropModel);
             }
@@ -213,8 +213,8 @@ public class CropDetails extends AppCompatActivity {
     }
 
 
-    void setPlotAdapter(ArrayAdapter<String> plotAdapter){
-        // Map<String, Object> plotDetailMap = plotModel.mapAllTheData();
+    private void setCropAdapter(ArrayAdapter<String> cropAdapter) {
+
         db.collection("farmer")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -233,32 +233,32 @@ public class CropDetails extends AppCompatActivity {
                             //db.collection("crop_details")
                             db.collection("farmer")
                                     .document(farmerDocId)
-                                    .collection("plot_details")
+                                    .collection("crop_details")
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            ArrayList<String> plotNameList = new ArrayList<>();
+                                            ArrayList<String> cropNameList = new ArrayList<>();
                                             if (task.isSuccessful()) {
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                                    Log.d(Utils.DB_TAG, document.getId() + " => " + document.get("plotName"));
+                                                    Log.d(Utils.DB_TAG, document.getId() + " => " + document.get("cropName"));
                                                     //String listOfCrops = (String) document.get("cropName");
                                                     //Log.d(TAG, "Data at crop_details retrieved successfully");
 
-                                                    plotNameList.add((String) document.get("plotName"));
-                                                    if(plotNameList.isEmpty()){
-                                                        plotAdapter.add("No Plot Found!");
+                                                    cropNameList.add((String) document.get("cropName"));
+                                                    if(cropNameList.isEmpty()){
+                                                        cropAdapter.add("No Plot Found!");
                                                     } else {
-                                                        plotAdapter.clear();
-                                                        plotAdapter.addAll(plotNameList);
+                                                        cropAdapter.clear();
+                                                        cropAdapter.addAll(cropNameList);
                                                     }
-                                                    plotAdapter.notifyDataSetChanged();
+                                                    cropAdapter.notifyDataSetChanged();
                                                     //Log.d("List of crops", String.valueOf(cropNameList));
 
 
                                                 }
                                                 Log.d(
-                                                        Utils.DB_TAG, String.valueOf(plotNameList)
+                                                        Utils.DB_TAG, String.valueOf(cropNameList)
                                                 );
                                             } else {
                                                 Log.d(Utils.DB_TAG, "Error getting documents: ", task.getException());
@@ -268,8 +268,7 @@ public class CropDetails extends AppCompatActivity {
                         }
                     }
 
-                });
-    };
+                });}
 
 
 }

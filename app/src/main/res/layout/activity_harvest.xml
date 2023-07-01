@@ -10,51 +10,72 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bggreen"
+        android:background="@drawable/bg5"
         android:orientation="vertical"
+        android:alpha="0.8"
         tools:context=".HarvestActivity">
 
 
         <Button
             android:id="@+id/savebutton"
-            android:layout_width="425dp"
-            android:layout_height="71dp"
-            android:backgroundTint="?android:attr/colorPressedHighlight"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="10"
+            android:backgroundTint="@color/yellow1"
+            android:ems="10"
+            android:foregroundTint="#EDE7E7"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:text="Save"
             android:textColor="@color/black"
-            android:textColorHighlight="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.828" />
+            app:layout_constraintVertical_bias="0.941" />
+
 
         <EditText
             android:id="@+id/etdateofsell"
-            android:layout_width="348dp"
-            android:layout_height="34dp"
-            android:alpha="10"
-            android:background="@drawable/bg4"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="0.7"
+            android:background="@drawable/bg"
             android:ems="10"
             android:foregroundTint="#EDE7E7"
-            android:hint="    Enter Sell Date"
+            android:hint="Enter Selling Date"
             android:inputType="text"
             android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.503" />
 
         <EditText
             android:id="@+id/etSellAmt"
-            android:layout_width="339dp"
-            android:layout_height="34dp"
-            android:alpha="10"
-            android:background="@drawable/bg4"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="0.7"
+            android:background="@drawable/bg"
             android:ems="10"
             android:foregroundTint="#EDE7E7"
             android:hint="Selling Amount (in Rs)"
@@ -67,16 +88,20 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.705" />
+            app:layout_constraintVertical_bias="0.767" />
 
         <EditText
             android:id="@+id/etQuantity"
-            android:layout_width="364dp"
-            android:layout_height="34dp"
-            android:alpha="10"
-            android:background="@drawable/bg4"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="0.7"
+            android:background="@drawable/bg"
             android:ems="10"
             android:foregroundTint="#EDE7E7"
             android:hint="Quantity (in Kgs)"
@@ -89,10 +114,10 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.615" />
-
+            app:layout_constraintVertical_bias="0.637" />
 
         <ImageView
             android:id="@+id/calender"
@@ -102,66 +127,118 @@
             android:src="@drawable/date"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.823"
+            app:layout_constraintHorizontal_bias="0.935"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.503"
+            app:layout_constraintVertical_bias="0.52"
             tools:ignore="MissingConstraints" />
 
         <Spinner
             android:id="@+id/spinnerCrop"
-            android:layout_width="251dp"
-            android:layout_height="39dp"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
             android:layout_weight="2"
-            android:alpha="10"
-            android:background="@drawable/bg4"
+            android:alpha="0.7"
+            android:background="@drawable/bg"
             android:ems="10"
             android:foregroundTint="#EDE7E7"
-            android:textSize="20dp"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="Enter Crop"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.374" />
+            app:layout_constraintVertical_bias="0.371" />
 
         <Spinner
             android:id="@+id/spinnerPlot"
-            android:layout_width="321dp"
-            android:layout_height="34dp"
-            android:layout_weight="2"
-            android:background="@drawable/bg4"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:alpha="0.7"
+            android:background="@drawable/bg"
+            android:ems="10"
+            android:foregroundTint="#EDE7E7"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:spinnerMode="dropdown"
-            android:textSize="20dp"
+            android:text="Enter Plot"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.256" />
+            app:layout_constraintVertical_bias="0.25" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/akaya_telivigala"
+
+            android:fontFamily="@font/cherry_cream_soda"
             android:text="Harvest Details"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="48sp"
+            android:textColor="@color/dark_pink"
+            android:textSize="38sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.384"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.085" />
+            app:layout_constraintVertical_bias="0.111" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="20dp" />
+            app:layout_constraintGuide_begin="-181dp" />
+
+        <TextView
+            android:id="@+id/tvplot"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="Enter Crop"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.424" />
+
+        <TextView
+            android:id="@+id/tvplot2"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="Enter Plot"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.307" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
