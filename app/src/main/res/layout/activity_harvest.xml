@@ -142,8 +142,9 @@
 
         <Button
             android:id="@+id/savebutton"
-            android:layout_width="200dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            and
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:backgroundTint="?android:attr/colorPressedHighlight"
