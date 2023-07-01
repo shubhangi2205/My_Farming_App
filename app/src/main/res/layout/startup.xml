@@ -10,10 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:alpha="500"
+        android:alpha="0.8"
         android:background="@drawable/splash"
-        android:backgroundTint="#80FFFFFF"
-        android:backgroundTintMode="src_over"
         tools:layout_editor_absoluteX="207dp">
 
         <TextView
@@ -25,15 +23,15 @@
             android:inputType="text"
             android:text="Krishi Saarthi"
             android:textAlignment="center"
-            android:textColor="@color/design_default_color_error"
+            android:textColor="@color/material_dynamic_secondary95"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintHorizontal_bias="0.478"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.239" />
+            app:layout_constraintVertical_bias="0.277" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
