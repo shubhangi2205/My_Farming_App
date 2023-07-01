@@ -7,107 +7,74 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@drawable/bggreen"
+        android:orientation="vertical"
         tools:context=".HarvestActivity">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/akaya_telivigala"
-            android:text="Harvest Details"
-            android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="48sp"
-            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/spinnerPlot"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="2"
-                android:background="@drawable/bg4"
-                android:spinnerMode="dropdown" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/spinnerCrop"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="20dp"
-                android:layout_weight="2"
-                android:background="@drawable/bg4"
-                android:layout_marginEnd="20dp"
-                android:alpha="10"
-                android:ems="10"
-                android:foregroundTint="#EDE7E7"/>
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/etDateOfSell"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:alpha="10"
-                android:background="@drawable/bg4"
-                android:ems="10"
-                android:foregroundTint="#EDE7E7"
-                android:hint="Date of Sell"
-                android:inputType="date"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:textColorHint="@color/black"
-                android:textSize="20sp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                tools:layout_editor_absoluteX="171dp"
-                tools:layout_editor_absoluteY="16dp" />
-
-            <ImageView
-                android:id="@+id/calender"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:src="@drawable/date"
-                app:layout_constraintEnd_toEndOf="@+id/etDateOfSell"
-                app:layout_constraintHorizontal_bias="0.929"
-                app:layout_constraintStart_toStartOf="@+id/etDateOfSell"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteY="21dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/savebutton"
+            android:layout_width="425dp"
+            android:layout_height="71dp"
+            android:backgroundTint="?android:attr/colorPressedHighlight"
+            android:text="Save"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.828" />
 
         <EditText
-            android:id="@+id/quantity"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
+            android:id="@+id/etdateofsell"
+            android:layout_width="348dp"
+            android:layout_height="34dp"
+            android:alpha="10"
+            android:background="@drawable/bg4"
+            android:ems="10"
+            android:foregroundTint="#EDE7E7"
+            android:hint="    Enter Sell Date"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etSellAmt"
+            android:layout_width="339dp"
+            android:layout_height="34dp"
+            android:alpha="10"
+            android:background="@drawable/bg4"
+            android:ems="10"
+            android:foregroundTint="#EDE7E7"
+            android:hint="Selling Amount (in Rs)"
+            android:inputType="number"
+            android:maxLines="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.705" />
+
+        <EditText
+            android:id="@+id/etQuantity"
+            android:layout_width="364dp"
+            android:layout_height="34dp"
             android:alpha="10"
             android:background="@drawable/bg4"
             android:ems="10"
@@ -117,42 +84,85 @@
             android:maxLines="1"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
+            android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.615" />
 
 
-        <EditText
-            android:id="@+id/sellamt"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
+        <ImageView
+            android:id="@+id/calender"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/date"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.823"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.503"
+            tools:ignore="MissingConstraints" />
+
+        <Spinner
+            android:id="@+id/spinnerCrop"
+            android:layout_width="251dp"
+            android:layout_height="39dp"
+            android:layout_weight="2"
             android:alpha="10"
             android:background="@drawable/bg4"
             android:ems="10"
             android:foregroundTint="#EDE7E7"
-            android:hint="Selling Amount"
-            android:inputType="number"
-            android:maxLines="1"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:textColorHint="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.374" />
 
-        <Button
-            android:id="@+id/savebutton"
-            android:layout_width="200dp"
-            android:layout_height="70dp"
+        <Spinner
+            android:id="@+id/spinnerPlot"
+            android:layout_width="321dp"
+            android:layout_height="34dp"
+            android:layout_weight="2"
+            android:background="@drawable/bg4"
+            android:spinnerMode="dropdown"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.256" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="?android:attr/colorPressedHighlight"
-            android:paddingBottom="10dp"
-            android:text="Save"
-            android:textColor="@color/black"
-            android:textColorHighlight="@color/black"
-            android:textSize="20sp" />
+            android:fontFamily="@font/akaya_telivigala"
+            android:text="Harvest Details"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.384"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.085" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

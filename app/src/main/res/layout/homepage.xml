@@ -17,7 +17,7 @@
 
             <GridLayout
                 android:id="@+id/gridLayout"
-                android:layout_width="405dp"
+                android:layout_width="380dp"
                 android:layout_height="358dp"
                 android:layout_marginTop="164dp"
                 android:alignmentMode="alignMargins"
@@ -117,10 +117,9 @@
                     app:cardMaxElevation="12dp">
 
                     <LinearLayout
-                        android:layout_width="173dp"
-                        android:layout_height="159dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-
                         android:orientation="vertical"
                         android:padding="16dp">
 
@@ -164,16 +163,16 @@
 
                         <ImageView
                             android:layout_width="80dp"
-                            android:layout_height="93dp"
+                            android:layout_height="80dp"
                             android:src="@drawable/suggestion" />
 
                         <TextView
-                            android:id="@+id/suggestion"
+                            android:id="@+id/farmingOutput"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:fontFamily="@font/product_sans_regular"
-                            android:text="SUGGESTIONS"
+                            android:text="FARMING OUTPUT"
                             android:textColor="#727D90"
                             android:textSize="18dp"
                             android:textStyle="bold" />

@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity {
 //    Button b2  ;
 //    TextView h1;
     EditText etPhoneNum;
+
     LoginBinding binding;
 
     @Override
