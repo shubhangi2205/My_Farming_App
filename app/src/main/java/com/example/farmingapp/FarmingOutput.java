@@ -3,10 +3,15 @@ package com.example.farmingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.farmingapp.databinding.*;
 import com.example.farmingapp.models.CropModel;
+import com.example.farmingapp.models.ExpenseModel;
 import com.example.farmingapp.models.FarmingOutputModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,12 +32,16 @@ public class FarmingOutput extends AppCompatActivity {
     FirebaseFirestore db;
     final String TAG = "firestore";
 
+    Button saveFarmingOutput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = FirebaseFirestore.getInstance();
 
-
+        saveFarmingOutput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
         FarmingOutputModel farmingOutputModel = new FarmingOutputModel(
                 "Sugarcane",
                 2019,
@@ -42,6 +51,13 @@ public class FarmingOutput extends AppCompatActivity {
         );
         saveFarmingOutputDetails(farmingOutputModel);
         getFarmingOutputDetails(farmingOutputModel);
+                Intent intent = new Intent(FarmingOutput.this, HomePage.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 
     void saveFarmingOutputDetails(FarmingOutputModel farmingOutputModel){

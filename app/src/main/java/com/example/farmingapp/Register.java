@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,9 +27,10 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
-    Button b1  ;
+    Button savebutton  ;
     EditText name, village, phone;
     FirebaseFirestore db;
+    TextView clicklogin;
 
     boolean isNameEntered = false;
     boolean isPhoneEntered = false;
@@ -39,10 +41,11 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.register);
 
         db = FirebaseFirestore.getInstance();
-        b1 = findViewById(R.id.savebutton1);
+        savebutton = findViewById(R.id.savebutton1);
         name = findViewById(R.id.date);
         phone = findViewById(R.id.description);
         village = findViewById(R.id.description1);
+        clicklogin = findViewById(R.id.clicklogin);
 
         LiveData<Boolean> shouldEnable = new MutableLiveData<>();
 
@@ -116,8 +119,14 @@ public class Register extends AppCompatActivity {
                 }
         );
 
-
-        b1.setOnClickListener(new View.OnClickListener() {
+        clicklogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Register.this, Login.class);
+                startActivity(intent);
+            }
+        });
+        savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

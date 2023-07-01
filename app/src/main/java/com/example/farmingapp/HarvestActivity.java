@@ -24,6 +24,8 @@ import com.example.farmingapp.databinding.ActivityHarvestBinding;
 import com.example.farmingapp.databinding.CropdetailsBinding;
 import com.example.farmingapp.databinding.PlotdetailsBinding;
 import com.example.farmingapp.models.CropModel;
+import com.example.farmingapp.models.ExpenseModel;
+import com.example.farmingapp.models.HarvestModel;
 import com.example.farmingapp.models.PlotModel;
 import com.example.farmingapp.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -58,6 +60,23 @@ public class HarvestActivity extends AppCompatActivity {
         setPlotAdapter(plotAdapter);
         setCropAdapter(cropAdapter);
 
+        binding.savebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HarvestModel harvestModel = new HarvestModel(
+
+                        binding.etdateofsell.getText().toString(),
+                        Integer.parseInt(binding.etQuantity.getText().toString()),
+                        Integer.parseInt(binding.etSellAmt.getText().toString())
+                );
+                saveHarvestDetails(harvestModel);
+                getHarvestDetails(harvestModel);
+                Intent intent = new Intent(HarvestActivity.this, HomePage.class);
+                startActivity(intent);
+
+            }
+        });
+
         // on below line we are adding click listener for our pick date button
         binding.calender.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +100,7 @@ public class HarvestActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // on below line we are setting date to our text view.
-                                binding.etDateOfSell.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                binding.etdateofsell.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
                             }
                         },
@@ -93,6 +112,106 @@ public class HarvestActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+    }
+
+    private void getHarvestDetails(HarvestModel harvestModel) {
+
+        Map<String, Object> harvestDetailMap = harvestModel.mapAllTheData();
+        db.collection("farmer")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String farmerDocId = null;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String phoneNum = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNum, "123568898")) {
+                                    farmerDocId = document.getId();
+                                    break;
+                                }
+                            }
+                            //db.collection("crop_details")
+                            db.collection("farmer")
+                                    .document(farmerDocId)
+                                    .collection("harvest_details")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            ArrayList<Integer> sellingAmountList = new ArrayList<>();
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    //Log.d(TAG, document.getId() + " => " + document.getData());
+                                                    Log.d(TAG, document.getId() + " => " + document.get("SellingAmount"));
+                                                    int sellingAmount = (int) document.get("SellingAmount");
+
+                                                    sellingAmountList.add(sellingAmount);
+                                                    //expenseDetailsList.add((String) document.get("ExpenseAmount"));
+                                                    Log.d("sellingAmountList", String.valueOf(sellingAmountList));
+
+
+                                                }
+                                                Log.d(TAG, "Data at harvest_details retrieved successfully");
+                                                Log.d(
+                                                        TAG, String.valueOf(sellingAmountList)
+                                                );
+                                            } else {
+                                                Log.d(TAG, "Error getting documents: ", task.getException());
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
+                });
+    }
+
+    private void saveHarvestDetails(HarvestModel harvestModel) {
+
+        Map<String, Object> harvestDetailMap = harvestModel.mapAllTheData();
+        db.collection("farmer")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String farmerDocId = null;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                String phoneNum = (String) document.get("Phone Number");
+                                if(Objects.equals(phoneNum, "123568898")) {
+                                    farmerDocId = document.getId();
+                                    break;
+                                }
+                            }
+                            db.collection("farmer")
+                                    .document(farmerDocId)
+                                    .collection("harvest_details")
+                                    .add(harvestDetailMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Log.d(TAG, "Data Saved at harvest_details successfully");
+                                            Intent intent = new Intent(HarvestActivity.this, CropDetails.class);
+                                            startActivity(intent);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull @NotNull Exception e) {
+
+                                            Log.d(TAG, "Failed to Save data at harvest_details");
+
+
+                                        }
+                                    });
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
     private void setCropAdapter(ArrayAdapter<String> cropAdapter) {

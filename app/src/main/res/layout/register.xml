@@ -17,19 +17,18 @@
             android:id="@+id/clicklogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/akaya_telivigala"
             android:text="Login"
             android:textAlignment="center"
-            android:textColor="@color/pink"
-            android:textSize="28sp"
+            android:textColor="@color/material_dynamic_neutral100"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:typeface="normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.871"
+            app:layout_constraintHorizontal_bias="0.816"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.966" />
+            app:layout_constraintVertical_bias="0.942" />
 
         <TextView
             android:id="@+id/textView7"
@@ -51,11 +50,12 @@
         <Button
             android:id="@+id/savebutton1"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="45dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
             android:alpha="10"
+            android:background="@drawable/bg"
             android:backgroundTint="?android:attr/colorPressedHighlight"
             android:ems="10"
             android:foregroundTint="#EDE7E7"

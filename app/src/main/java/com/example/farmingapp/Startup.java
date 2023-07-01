@@ -18,7 +18,7 @@ public class Startup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.startup);
 
-        Intent i = new Intent(Startup.this,Register.class);
+        Intent i = new Intent(Startup.this,Login.class);
         long delayMillis;
         //int i1 = 4000;
         new Handler().postDelayed(new Runnable() {

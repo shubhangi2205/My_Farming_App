@@ -81,6 +81,8 @@ public class ExpenseActivity extends AppCompatActivity {
                 );
                 saveExpenseDetails(expenseModel);
                 getExpenseDetails(expenseModel);
+                Intent intent = new Intent(ExpenseActivity.this, HomePage.class);
+                startActivity(intent);
 
             }
         });

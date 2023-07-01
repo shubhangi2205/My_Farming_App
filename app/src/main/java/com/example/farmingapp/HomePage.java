@@ -27,7 +27,7 @@ public class HomePage extends AppCompatActivity {
         t1 = findViewById(R.id.expense);
         t2 = findViewById(R.id.harvest);
         t3 = findViewById(R.id.dashboard);
-        t4 = findViewById(R.id.suggestion);
+        t4 = findViewById(R.id.farmingOutput);
 
         t1.setOnClickListener(
                 new View.OnClickListener() {
@@ -65,7 +65,7 @@ public class HomePage extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent i = new Intent(HomePage.this,CropDetails.class);
+                        Intent i = new Intent(HomePage.this,FarmingOutput.class);
                         startActivity(i);
                     }
                 }
