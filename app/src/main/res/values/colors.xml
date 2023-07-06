@@ -9,4 +9,9 @@
     <color name="yellow">#F7E64F</color>
     <color name="dark_pink">#D50F52</color>
     <color name="yellow1">#FFEB3B</color>
+    <color name="light_green">#75F37B</color>
+    <color name="light_green1">#4DABF436</color>
+    <color name="light_g">#8052F436</color>
+    <color name="light_white">#40FDF9F9</color>
+    <color name="light_w">#59FDFAFA</color>
 </resources>

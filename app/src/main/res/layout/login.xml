@@ -2,7 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
 
     </data>
@@ -20,96 +19,161 @@
             tools:layout_editor_absoluteX="207dp">
 
 
-            <Button
-                android:id="@+id/getotp"
-                android:layout_width="131dp"
-                android:layout_height="55dp"
-                android:backgroundTint="?android:attr/colorPressedHighlight"
-                android:text="Get OTP"
-                android:textColorHighlight="@color/black"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.757"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.594" />
-
-
-            <EditText
-                android:id="@+id/et_phone_num"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="20dp"
-                android:alpha="10"
-                android:background="@drawable/styles"
-                android:foregroundTint="#EDE7E7"
-                android:hint="Enter Phone Number"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:textColorHint="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.272" />
-
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/tvlogin"
+                android:layout_width="499dp"
+                android:layout_height="77dp"
                 android:fontFamily="@font/kaushan_script"
-                android:text="Login"
+                android:text="Welcome Back !!"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="60sp"
+                android:textSize="44sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.503"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.081" />
+                app:layout_constraintVertical_bias="0.123" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="206dp"
-                android:layout_height="39dp"
-                android:fontFamily="@font/architects_daughter"
-                android:text="Don't have account ?"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.116"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.811" />
-
-            <TextView
-                android:id="@+id/register_link"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register"
-                android:textAlignment="center"
-                android:textColor="@color/design_default_color_error"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:typeface="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.743"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.798" />
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="441dp" />
+
+<!--            <com.google.android.material.card.MaterialCardView-->
+<!--                android:id="@+id/materialCardView"-->
+<!--                style="@style/custom_card_view_style"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="550dp"-->
+<!--                app:cardPreventCornerOverlap="false"-->
+<!--&gt;-->
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="440dp"
+                    android:background="@drawable/enter_phone_number_page_rounded_background"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:paddingBottom="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/guideline3"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPhoneNum"
+                        android:layout_width="365dp"
+                        android:layout_height="50dp"
+                        android:hint="Enter Phone Number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:maxLines="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                        app:layout_constraintVertical_bias="0.195" />
+
+                    <Button
+                        android:id="@+id/getotp"
+                        android:layout_width="200dp"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="20dp"
+                        android:backgroundTint="@color/yellow1"
+                        android:ems="10"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:text="Login"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.943"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.457" />
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/et_phone_num"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="45dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginTop="40dp"-->
+<!--                        android:layout_marginEnd="20dp"-->
+<!--                        android:alpha="0.4"-->
+<!--                        android:background="@drawable/bg"-->
+<!--                        android:backgroundTint="@color/black"-->
+<!--                        android:ems="10"-->
+<!--                        android:foregroundTint="#EDE7E7"-->
+<!--                        android:hint="Enter Phone Number"-->
+<!--                        android:inputType="phone"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:paddingStart="20dp"-->
+<!--                        android:paddingEnd="20dp"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textColorHint="@color/white"-->
+<!--                        android:textSize="20sp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.0"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintVertical_bias="0.23" />-->
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <TextView
+                        android:id="@+id/register_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kaushan_script"
+                        android:text="Register"
+                        android:textAlignment="center"
+                        android:textColor="@color/design_default_color_error"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:typeface="normal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.909"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.755" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="276dp"
+                        android:layout_height="32dp"
+                        android:fontFamily="@font/architects_daughter"
+                        android:text="Don't have an account ?"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.757" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            </com.google.android.material.card.MaterialCardView>-->
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

@@ -8,13 +8,14 @@ import java.util.Map;
 
 public class ExpenseModel {
 
-    SpinnerAdapter typeOfExpense;
+    //SpinnerAdapter typeOfExpense;
+    String typeOfExpense;
     String dateOfExpense;
     String desc;
     int expenseAmount;
 
 
-    public ExpenseModel(SpinnerAdapter typeOfExpense, String dateOfExpense, String desc, int expenseAmount) {
+    public ExpenseModel(String typeOfExpense, String dateOfExpense, String desc, int expenseAmount) {
         //this.cropNameList = cropNameList;
         this.typeOfExpense = typeOfExpense;
         this.dateOfExpense = dateOfExpense;

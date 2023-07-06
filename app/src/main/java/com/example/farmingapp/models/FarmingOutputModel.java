@@ -1,18 +1,21 @@
 package com.example.farmingapp.models;
 
+import android.widget.SpinnerAdapter;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class FarmingOutputModel {
 
     String cropName;
-    int year;
+    String year;
+    //String season;
     String season;
-    int yield;
-
+    long yield;
+    //List<String> plotList;
     String plot;
 
-    public FarmingOutputModel(String cropName, int year, String season, int yield, String plot) {
+    public FarmingOutputModel(String cropName, String year, String season, long sowingArea, String plot) {
         //this.cropNameList = cropNameList;
         this.cropName = cropName;
         this.year = year;

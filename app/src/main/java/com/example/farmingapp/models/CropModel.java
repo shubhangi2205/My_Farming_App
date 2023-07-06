@@ -9,14 +9,14 @@ import java.util.Map;
 public class CropModel {
     //List<String> cropNameList;
     String cropName;
-    SpinnerAdapter year;
+    String year;
     //String season;
-    SpinnerAdapter season;
+    String season;
     long sowingArea;
     //List<String> plotList;
-    SpinnerAdapter plot;
+    String plot;
 
-    public CropModel(String cropName, SpinnerAdapter year, SpinnerAdapter season, long sowingArea, SpinnerAdapter plot) {
+    public CropModel(String cropName, String year, String season, long sowingArea, String plot) {
         //this.cropNameList = cropNameList;
         this.cropName = cropName;
         this.year = year;

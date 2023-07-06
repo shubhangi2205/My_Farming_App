@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -37,6 +39,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
 import java.util.Objects;
 
@@ -47,6 +50,7 @@ public class ExpenseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //String phoneNum = getIntent().getStringExtra("phoneNum");
         binding = DataBindingUtil.setContentView(this,R.layout.activity_expense);
         db = FirebaseFirestore.getInstance();
         ArrayAdapter<String> plotAdapter = new ArrayAdapter<String>(this, R.layout.spinner_dropdown_item, R.id.txtSpinnerItemPlot);
@@ -55,10 +59,19 @@ public class ExpenseActivity extends AppCompatActivity {
         binding.spinnerCrop.setAdapter(cropAdapter);
         setPlotAdapter(plotAdapter);
         setCropAdapter(cropAdapter);
+        String[] items= new String[]{"Labour","Seeds","Fertilizers", "Electricity", "Water", "Transportation"};
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerTypeOfExpense);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, items);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
         binding.tvPlot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ExpenseActivity.this, PlotDetails.class);
+                //intent.putExtra("phoneNum", "+91"+phoneNum);
                 startActivity(intent);
             }
         });
@@ -66,23 +79,81 @@ public class ExpenseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ExpenseActivity.this, CropDetails.class);
+                //intent.putExtra("phoneNum", "+91"+phoneNum);
                 startActivity(intent);
             }
         });
 
+        binding.calender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // on below line we are getting
+                // the instance of our calendar.
+                final Calendar c = Calendar.getInstance();
+
+                // on below line we are getting
+                // our day, month and year.
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                // on below line we are creating a variable for date picker dialog.
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        // on below line we are passing context.
+                        ExpenseActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // on below line we are setting date to our text view.
+                                int month = (monthOfYear + 1);
+                                String monthStr = String.format("%02d", month);
+                                String dayStr = String.format("%02d", dayOfMonth);
+                                binding.etDateOfExpense.setText(dayStr + "-" + monthStr + "-" + year);
+
+                            }
+                        },
+                        // on below line we are passing year,
+                        // month and day for selected date in our date picker.
+                        year, month, day);
+                // at last we are calling show to
+                // display our date picker dialog.
+                datePickerDialog.show();
+            }
+        });
+
+
+
         binding.saveExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ExpenseModel expenseModel = new ExpenseModel(
-//                        binding.spinnerTypeOfExpense.getAdapter(),
-//                        binding.etDateOfExpense.getText().toString(),
-//                        binding.description1.getText().toString(),
-//                        Integer.parseInt(binding.amt.getText().toString())
-//                );
-               // saveExpenseDetails(expenseModel);
-                getExpenseDetails();
-//                Intent intent = new Intent(ExpenseActivity.this, HomePage.class);
-//                startActivity(intent);
+                ExpenseModel expenseModel = new ExpenseModel(
+                        binding.spinnerTypeOfExpense.getSelectedItem().toString(),
+                        binding.etDateOfExpense.getText().toString(),
+                        binding.description1.getText().toString(),
+                        Integer.parseInt(binding.amt.getText().toString())
+                );
+                String DateOfExpense = binding.etDateOfExpense.getText().toString();
+                String Desc = binding.description1.getText().toString();
+                String Amount  = binding.amt.getText().toString();
+                if(DateOfExpense.isEmpty()){
+                    //Name.setError("Required");
+                    //Name.requestFocus();
+                    binding.etDateOfExpense.setError("Required");
+                    return;
+                }
+                if(Desc.isEmpty()){
+                    binding.description1.setError("Required");
+                    return;
+                }
+                if(Amount.isEmpty()){
+                    binding.amt.setError("Required");
+                    return;
+                }
+                saveExpenseDetails(expenseModel);
+                //getExpenseDetails();
+                Intent intent = new Intent(ExpenseActivity.this, HomePage.class);
+                startActivity(intent);
 
             }
         });
@@ -97,12 +168,13 @@ public class ExpenseActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        String phoneNum = getIntent().getStringExtra("phoneNum");
                         if (task.isSuccessful()) {
                             String farmerDocId = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String phoneNum = (String) document.get("Phone Number");
-                                if (Objects.equals(phoneNum, "123568898")) {
+                                String phoneNumber = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNumber,phoneNum)) {
                                     farmerDocId = document.getId();
                                     break;
                                 }
@@ -146,12 +218,13 @@ public class ExpenseActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //String phoneNum = getIntent().getStringExtra("phoneNum");
                         if (task.isSuccessful()) {
                             String farmerDocId = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String phoneNum = (String) document.get("Phone Number");
-                                if(Objects.equals(phoneNum, "123568898")) {
+                                String phoneNumber = (String) document.get("Phone Number");
+                                if(Objects.equals(phoneNumber,Utils.phoneNum)) {
                                     farmerDocId = document.getId();
                                     break;
                                 }
@@ -189,12 +262,13 @@ public class ExpenseActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //String phoneNum = getIntent().getStringExtra("phoneNum");
                         if (task.isSuccessful()) {
                             String farmerDocId = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String phoneNum = (String) document.get("Phone Number");
-                                if (Objects.equals(phoneNum, "123568898")) {
+                                String phoneNumber = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNumber,Utils.phoneNum)) {
                                     farmerDocId = document.getId();
                                     break;
                                 }
@@ -216,7 +290,7 @@ public class ExpenseActivity extends AppCompatActivity {
 
                                                     cropNameList.add((String) document.get("cropName"));
                                                     if(cropNameList.isEmpty()){
-                                                        cropAdapter.add("No Plot Found!");
+                                                        cropAdapter.add("No Crop Found!");
                                                     } else {
                                                         cropAdapter.clear();
                                                         cropAdapter.addAll(cropNameList);
@@ -248,12 +322,13 @@ public class ExpenseActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //String phoneNum = getIntent().getStringExtra("phoneNum");
                         if (task.isSuccessful()) {
                             String farmerDocId = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String phoneNum = (String) document.get("Phone Number");
-                                if (Objects.equals(phoneNum, "123568898")) {
+                                String phoneNumber = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNumber,Utils.phoneNum)) {
                                     farmerDocId = document.getId();
                                     break;
                                 }

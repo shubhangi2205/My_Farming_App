@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import com.example.farmingapp.databinding.PlotdetailsBinding;
 import com.example.farmingapp.models.CropModel;
 import com.example.farmingapp.models.PlotModel;
+import com.example.farmingapp.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,12 +48,31 @@ public class PlotDetails extends AppCompatActivity {
                         binding.editAreaName.getText().toString(),
                         Integer.parseInt(binding.editArea.getText().toString()),
                         binding.editLocation.getText().toString()
+
+
                 );
+                String AreaName = binding.editAreaName.getText().toString();
+                String Area = binding.editArea.getText().toString();
+                String Location  = binding.editLocation.getText().toString();
+                if(AreaName.isEmpty()){
+                    //Name.setError("Required");
+                    //Name.requestFocus();
+                    binding.editAreaName.setError("Required");
+                    return;
+                }
+                if(Area.isEmpty()){
+                    binding.editArea.setError("Required");
+                    return;
+                }
+                if(Location.isEmpty()){
+                    binding.editLocation.setError("Required");
+                    return;
+                }
                 savePlotDetails(plotModel);
             }
         });
 
-      //  getPlotDetails(plotModel);
+      //  getPlotDetails();
     }
 
     void savePlotDetails(PlotModel plotModel){
@@ -62,12 +82,13 @@ public class PlotDetails extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //String phoneNum = getIntent().getStringExtra("phoneNum");
                         if (task.isSuccessful()) {
                             String farmerDocId = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String phoneNum = (String) document.get("Phone Number");
-                                if(Objects.equals(phoneNum, "123568898")) {
+                                String phoneNumber = (String) document.get("Phone Number");
+                                if(Objects.equals(phoneNumber,Utils.phoneNum)) {
                                     farmerDocId = document.getId();
                                     break;
                                 }
@@ -110,7 +131,7 @@ public class PlotDetails extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                                 String phoneNum = (String) document.get("Phone Number");
-                                if (Objects.equals(phoneNum, "123568898")) {
+                                if (Objects.equals(phoneNum, Utils.phoneNum)) {
                                     farmerDocId = document.getId();
                                     break;
                                 }

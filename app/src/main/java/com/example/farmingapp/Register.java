@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.farmingapp.utils.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -149,30 +150,13 @@ public class Register extends AppCompatActivity {
                     return;
                 }
                // b1.setEnabled(!Name.isEmpty() && !Phone.isEmpty() && !Village.isEmpty());
+                Utils.name = Name;
+                Utils.phoneNum = Phone;
+                Utils.village = Village;
 
-                Map<String,Object> farmer = new HashMap<>();
-                farmer.put("Name",Name);
-                farmer.put("Phone Number",Phone);
-                farmer.put("Village",Village);
-
-                db.collection("farmer")
-                        .add(farmer)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(Register.this,"Details saved",Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull @NotNull Exception e) {
-
-                                Toast.makeText(Register.this,"Failed",Toast.LENGTH_SHORT).show();
-
-
-                            }
-                        });
                 Intent i = new Intent(Register.this,Login.class);
-                i.putExtra("phoneNum", "+91"+phone.getText().toString());
+//                i.putExtra("phoneNum", phone.getText().toString());
+//                Utils.phoneNum = phone.getText().toString();
                 startActivity(i);
             }
         });

@@ -69,10 +69,27 @@ public class HarvestActivity extends AppCompatActivity {
                         Integer.parseInt(binding.etQuantity.getText().toString()),
                         Integer.parseInt(binding.etSellAmt.getText().toString())
                 );
+                String DateOfSell = binding.etdateofsell.getText().toString();
+                String Quantity = binding.etQuantity.getText().toString();
+                String SellAmt  = binding.etSellAmt.getText().toString();
+                if(DateOfSell.isEmpty()){
+                    //Name.setError("Required");
+                    //Name.requestFocus();
+                    binding.etdateofsell.setError("Required");
+                    return;
+                }
+                if(Quantity.isEmpty()){
+                    binding.etQuantity.setError("Required");
+                    return;
+                }
+                if(SellAmt.isEmpty()){
+                    binding.etSellAmt.setError("Required");
+                    return;
+                }
                 saveHarvestDetails(harvestModel);
-                getHarvestDetails(harvestModel);
-                Intent intent = new Intent(HarvestActivity.this, HomePage.class);
-                startActivity(intent);
+                //getHarvestDetails(harvestModel);
+//                Intent intent = new Intent(HarvestActivity.this, HomePage.class);
+//                startActivity(intent);
 
             }
         });
@@ -100,7 +117,10 @@ public class HarvestActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // on below line we are setting date to our text view.
-                                binding.etdateofsell.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                int month = (monthOfYear + 1);
+                                String monthStr = String.format("%02d", month);
+                                String dayStr = String.format("%02d", dayOfMonth);
+                                binding.etdateofsell.setText(dayStr + "-" + monthStr + "-" + year);
 
                             }
                         },
@@ -122,12 +142,13 @@ public class HarvestActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //String phoneNum = getIntent().getStringExtra("phoneNum");
                         if (task.isSuccessful()) {
                             String farmerDocId = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String phoneNum = (String) document.get("Phone Number");
-                                if (Objects.equals(phoneNum, "123568898")) {
+                                String phoneNumber = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNumber,"7355303625")) {
                                     farmerDocId = document.getId();
                                     break;
                                 }
@@ -144,21 +165,16 @@ public class HarvestActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             ArrayList<Integer> sellingAmountList = new ArrayList<>();
                                             if (task.isSuccessful()) {
-                                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                                    //Log.d(TAG, document.getId() + " => " + document.getData());
+                                                QuerySnapshot querySnapshot = task.getResult();
+                                                for (QueryDocumentSnapshot document : querySnapshot) {
+                                                    Log.d(TAG, document.getId() + " => " + document.getData());
                                                     Log.d(TAG, document.getId() + " => " + document.get("SellingAmount"));
-                                                    int sellingAmount = (int) document.get("SellingAmount");
-
+                                                    int sellingAmount = document.getLong("SellingAmount").intValue();
                                                     sellingAmountList.add(sellingAmount);
-                                                    //expenseDetailsList.add((String) document.get("ExpenseAmount"));
                                                     Log.d("sellingAmountList", String.valueOf(sellingAmountList));
-
-
                                                 }
                                                 Log.d(TAG, "Data at harvest_details retrieved successfully");
-                                                Log.d(
-                                                        TAG, String.valueOf(sellingAmountList)
-                                                );
+                                                Log.d(TAG, String.valueOf(sellingAmountList));
                                             } else {
                                                 Log.d(TAG, "Error getting documents: ", task.getException());
                                             }
@@ -178,12 +194,13 @@ public class HarvestActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //String phoneNum = getIntent().getStringExtra("phoneNum");
                         if (task.isSuccessful()) {
                             String farmerDocId = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String phoneNum = (String) document.get("Phone Number");
-                                if(Objects.equals(phoneNum, "123568898")) {
+                                String phoneNumber = (String) document.get("Phone Number");
+                                if(Objects.equals(phoneNumber,Utils.phoneNum)) {
                                     farmerDocId = document.getId();
                                     break;
                                 }
@@ -195,7 +212,7 @@ public class HarvestActivity extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
                                             Log.d(TAG, "Data Saved at harvest_details successfully");
-                                            Intent intent = new Intent(HarvestActivity.this, CropDetails.class);
+                                            Intent intent = new Intent(HarvestActivity.this, HomePage.class);
                                             startActivity(intent);
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
@@ -221,12 +238,13 @@ public class HarvestActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //String phoneNum = getIntent().getStringExtra("phoneNum");
                         if (task.isSuccessful()) {
                             String farmerDocId = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String phoneNum = (String) document.get("Phone Number");
-                                if (Objects.equals(phoneNum, "123568898")) {
+                                String phoneNumber = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNumber,Utils.phoneNum)) {
                                     farmerDocId = document.getId();
                                     break;
                                 }
@@ -280,12 +298,13 @@ public class HarvestActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        //String phoneNum = getIntent().getStringExtra("phoneNum");
                         if (task.isSuccessful()) {
                             String farmerDocId = null;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d(TAG, document.getId() + " => " + document.getData());
-                                String phoneNum = (String) document.get("Phone Number");
-                                if (Objects.equals(phoneNum, "123568898")) {
+                                String phoneNumber = (String) document.get("Phone Number");
+                                if (Objects.equals(phoneNumber,Utils.phoneNum)) {
                                     farmerDocId = document.getId();
                                     break;
                                 }
